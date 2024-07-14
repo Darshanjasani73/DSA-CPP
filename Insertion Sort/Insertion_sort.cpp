@@ -1,36 +1,44 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-void insertionSort(int arr[],int n)
-{
-    int arr2[n];
-    arr2[0]=arr[0];
-    for(int i=0;i<n;i++)
-    {
-        for(int j=0;j<n;j++)
-        {
-           if(arr)
+
+void insertionSort(int arr[], int n) {
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
         }
+        arr[j + 1] = key;
     }
 }
-void printarray(int arr[],int n)
-{
-    for(int i=0;i<n;i++)
-    {
-        cout<<arr[i]<<endl;
+
+void printArray(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
     }
+    cout << endl;
 }
-int main()
-{
+
+int main() {
     int n;
-    cout<<"num: "<<endl;
-    cin>>n;
+    cout << "Enter number of elements: ";
+    cin >> n;
+
     int arr[n];
-    for(int i=0;i<n;i++)
-    {
-        cin>>arr[i];
+    cout << "Enter " << n << " integers: ";
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
     }
-    cout<<endl;
-    printarray(arr,n);
-    cout<<endl;
+
+    cout << "Array before sorting: ";
+    printArray(arr, n);
+
+    insertionSort(arr, n);
+
+    cout << "Array after sorting: ";
+    printArray(arr, n);
+
     return 0;
 }
