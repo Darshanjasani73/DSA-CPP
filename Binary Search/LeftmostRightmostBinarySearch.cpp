@@ -1,76 +1,72 @@
 #include<iostream>
 using namespace std;
-int LObinary_search(int arr[],int n,int key)
-{
-    int i=0,mid=0,left=0;
-    mid = (i + (--n))/2;
-    while(i<n)
-    {
-        if(arr[mid]==key)
-        {
-            left = mid;
-            n=mid;
+
+int LObinary_search(int arr[], int n, int key) {
+    int left = 0, right = n - 1, result = -1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] == key) {
+            result = mid;
+            right = mid - 1; 
+        } else if (arr[mid] > key) {
+            right = mid - 1;
+        } else {
+            left = mid + 1;
         }
-        else if(arr[mid]>key)
-        {
-            n=mid;
-        }
-        else if(arr[mid]<key)
-        {
-            i=mid+1;
-        }
-        mid = (i+n)/2;
     }
-    return left;
+    return result;
 }
-int RObinary_search(int arr[],int n,int key)
-{
-    int i=0,mid=0,right=0;
-    mid = (i + (--n))/2;
-    while(i<n)
-    {
-        if(arr[mid]==key)
-        {
-            right = mid;
-            i=mid+1;
+
+int RObinary_search(int arr[], int n, int key) {
+    int left = 0, right = n - 1, result = -1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] == key) {
+            result = mid;
+            left = mid + 1;
+        } else if (arr[mid] > key) {
+            right = mid - 1;
+        } else {
+            left = mid + 1;
         }
-        else if(arr[mid]>key)
-        {
-            n=mid;
-        }
-        else if(arr[mid]<key)
-        {
-            i=mid+1;
-        }
-        mid = (i+n)/2;
     }
-    return right ;
+    return result;
 }
-void printarray(int arr[],int n)
-{
-    for(int i=0; i<n; i++)
-    {
-        cout<<arr[i]<<endl;
+
+
+void printarray(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
     }
+    cout << endl;
 }
-int main()
-{
+
+int main() {
     int n;
-    cout<<"enter the length of array"<<endl;
-    cin>>n;
+    cout << "Enter the length of the array: ";
+    cin >> n;
     int arr[n];
-    cout<<"enter the values array"<<endl;
-    for(int i=0; i<n; i++)
-    {
-        cin>>arr[i];
+    cout << "Enter the values of the array: " << endl;
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
     }
-    cout<<"printing the array: "<<endl;
-    printarray(arr,n);
+
+    cout << "Printing the array: " << endl;
+    printarray(arr, n);
+
     int key;
-    cout<<"KEY: "<<endl;
-    cin>>key;
-    cout<<LObinary_search(arr,n,key)<<" "<<RObinary_search(arr,n,key);
+    cout << "Enter the key to search: ";
+    cin >> key;
+
+    int lo = LObinary_search(arr, n, key);
+    int ro = RObinary_search(arr, n, key);
+
+    if (lo == -1 || ro == -1) {
+        cout << "Key not found in the array." << endl;
+    } else {
+        cout << "Leftmost occurrence of " << key << " is at index: " << lo << endl;
+        cout << "Rightmost occurrence of " << key << " is at index: " << n-ro << endl;
+    }
+
     return 0;
 }
-
-
